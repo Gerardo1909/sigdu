@@ -106,3 +106,44 @@ export interface InstitutionConfig {
   contact_email: string | null;
   contact_phone: string | null;
 }
+
+// Analytics
+export interface EnrollmentOverTime {
+  date: string;
+  count: number;
+}
+
+export interface AttendanceByActivity {
+  activity_name: string;
+  avg_rate: number; // 0-100
+  total_sessions: number;
+}
+
+export interface EnrollmentByDiscipline {
+  discipline_name: string;
+  count: number;
+}
+
+export interface AnalyticsCharts {
+  enrollments_over_time: EnrollmentOverTime[];
+  attendance_by_activity: AttendanceByActivity[];
+  enrollments_by_discipline: EnrollmentByDiscipline[];
+}
+
+export interface AnalyticsDashboardResponse {
+  total_enrollments: number;
+  avg_attendance_rate: number; // 0-100
+  active_activities: number;
+  total_students: number;
+  charts: AnalyticsCharts;
+}
+
+// Setup
+export interface SetupInstitutionPayload {
+  name: string;
+  slug: string;
+  email_domains: string[];
+  admin_email: string;
+  admin_password: string;
+  admin_full_name: string;
+}
