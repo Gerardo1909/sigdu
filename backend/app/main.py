@@ -35,9 +35,15 @@ def create_app() -> FastAPI:
 
     from app.auth.router import router as auth_router
     from app.catalog.router import router as catalog_router
+    from app.enrollment.router import router as enrollment_router
+    from app.attendance.router import router as attendance_router
+    from app.admin.router import router as admin_router
 
     app.include_router(auth_router)
     app.include_router(catalog_router)
+    app.include_router(enrollment_router)
+    app.include_router(attendance_router)
+    app.include_router(admin_router)
 
     return app
 

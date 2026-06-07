@@ -117,6 +117,29 @@ async def create_schemas_and_tables() -> None:
             )
         """))
 
+        # tenant_unsam.class_sessions (Sprint 2)
+        await conn.execute(text("""
+            CREATE TABLE IF NOT EXISTS tenant_unsam.class_sessions (
+                id VARCHAR NOT NULL,
+                activity_id VARCHAR NOT NULL REFERENCES tenant_unsam.activities(id),
+                date DATE NOT NULL,
+                created_by VARCHAR REFERENCES tenant_unsam.users(id),
+                PRIMARY KEY (id)
+            )
+        """))
+
+        # tenant_unsam.attendance_records (Sprint 2)
+        await conn.execute(text("""
+            CREATE TABLE IF NOT EXISTS tenant_unsam.attendance_records (
+                id VARCHAR NOT NULL,
+                class_session_id VARCHAR NOT NULL REFERENCES tenant_unsam.class_sessions(id),
+                user_id VARCHAR NOT NULL REFERENCES tenant_unsam.users(id),
+                present BOOLEAN NOT NULL DEFAULT FALSE,
+                recorded_at TIMESTAMPTZ DEFAULT NOW(),
+                PRIMARY KEY (id)
+            )
+        """))
+
     print("[SEED] Schemas y tablas OK")
 
 

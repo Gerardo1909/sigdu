@@ -18,7 +18,6 @@ import {
   Layers,
   LogOut,
   ClipboardList,
-  CheckSquare,
 } from "lucide-react";
 
 interface NavItem {
@@ -37,15 +36,14 @@ function getNavItems(role: UserRole): NavItem[] {
     case "profesor":
       return [
         { label: "Mis Clases", href: "/dashboard/professor", icon: <BookOpen className="w-4 h-4" /> },
-        { label: "Tomar Asistencia", href: "/dashboard/professor", icon: <CheckSquare className="w-4 h-4" /> },
       ];
     case "admin":
     case "super_admin":
       return [
-        { label: "Disciplinas", href: "/dashboard/admin", icon: <Layers className="w-4 h-4" /> },
-        { label: "Sedes", href: "/dashboard/admin", icon: <Building2 className="w-4 h-4" /> },
-        { label: "Usuarios", href: "/dashboard/admin", icon: <Users className="w-4 h-4" /> },
-        { label: "Configuración", href: "/dashboard/admin", icon: <Settings className="w-4 h-4" /> },
+        { label: "Disciplinas", href: "/dashboard/admin/disciplines", icon: <Layers className="w-4 h-4" /> },
+        { label: "Sedes", href: "/dashboard/admin/venues", icon: <Building2 className="w-4 h-4" /> },
+        { label: "Usuarios", href: "/dashboard/admin/users", icon: <Users className="w-4 h-4" /> },
+        { label: "Configuración", href: "/dashboard/admin/institution", icon: <Settings className="w-4 h-4" /> },
         { label: "Analytics", href: "/dashboard/analytics", icon: <BarChart2 className="w-4 h-4" /> },
       ];
     case "directivo":

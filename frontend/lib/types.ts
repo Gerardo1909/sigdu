@@ -48,3 +48,61 @@ export interface PaginatedResponse<T> {
   total: number;
   page: number;
 }
+
+// Enrollment
+export interface Enrollment {
+  id: string;
+  activity_id: string;
+  activity_name: string;
+  status: string;
+  enrolled_at: string;
+}
+
+export interface MyEnrollmentsResponse {
+  enrollments: Enrollment[];
+  total: number;
+}
+
+// Attendance
+export interface EnrolledStudent {
+  user_id: string;
+  full_name: string;
+  email: string;
+}
+
+export interface ClassSession {
+  id: string;
+  activity_id: string;
+  activity_name: string;
+  date: string;
+  enrolled_students: EnrolledStudent[];
+}
+
+export interface AttendanceSummary {
+  total: number;
+  present: number;
+  absent: number;
+  percentage: number;
+}
+
+// Admin
+export interface UserAdmin {
+  id: string;
+  email: string;
+  full_name: string;
+  role: UserRole;
+  is_active: boolean;
+}
+
+export interface PaginatedUsers {
+  items: UserAdmin[];
+  total: number;
+  page: number;
+}
+
+export interface InstitutionConfig {
+  name: string;
+  logo_url: string | null;
+  contact_email: string | null;
+  contact_phone: string | null;
+}

@@ -21,6 +21,7 @@ export default function ActivityDetailPage() {
   const [activity, setActivity] = useState<ActivityDetail | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isEnrolling, setIsEnrolling] = useState(false);
 
   useEffect(() => {
     if (!params.id) return;
@@ -37,14 +38,26 @@ export default function ActivityDetailPage() {
       });
   }, [params.id]);
 
-  function handleEnroll() {
+  async function handleEnroll() {
     if (!isAuthenticated) {
       toast.info("Debés iniciar sesión para inscribirte");
       router.push("/login");
       return;
     }
-    // Placeholder para Sprint 2
-    toast.info("Inscripción disponible en Sprint 2");
+    if (!activity || user?.role !== "alumno") {
+      toast.error("Solo los alumnos pueden inscribirse");
+      return;
+    }
+    setIsEnrolling(true);
+    try {
+      await api.post("/api/v1/enrollments", { activity_id: activity.id });
+      toast.success(`¡Te inscribiste en ${activity.name}!`);
+      router.push("/dashboard/student");
+    } catch (err: unknown) {
+      toast.error(err instanceof Error ? err.message : "Error al inscribirse");
+    } finally {
+      setIsEnrolling(false);
+    }
   }
 
   const available = activity
@@ -175,10 +188,10 @@ export default function ActivityDetailPage() {
             <div className="flex flex-col sm:flex-row gap-3">
               <Button
                 onClick={handleEnroll}
-                disabled={isFull}
+                disabled={isFull || isEnrolling}
                 className="bg-[#6B8EAE] hover:bg-[#5a7a9c] text-white font-semibold px-8 disabled:opacity-50"
               >
-                {isFull ? "Sin cupos disponibles" : "Inscribirme"}
+                {isEnrolling ? "Inscribiendo..." : isFull ? "Sin cupos disponibles" : "Inscribirme"}
               </Button>
               <Link href="/catalog">
                 <Button
