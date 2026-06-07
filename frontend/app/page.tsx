@@ -13,7 +13,7 @@ export default function HomePage() {
               <Activity className="w-5 h-5 text-white" />
             </div>
             <span className="text-xl font-bold tracking-tight">SIGDU</span>
-            <Badge variant="secondary" className="text-xs">
+            <Badge variant="secondary" className="text-xs bg-white/10 text-white/70 border-white/20">
               UNSAM
             </Badge>
           </div>

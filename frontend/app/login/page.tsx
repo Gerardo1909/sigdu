@@ -41,12 +41,15 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0A0A0A] flex items-center justify-center px-4">
-      <div className="w-full max-w-md space-y-6">
+    <div className="min-h-screen bg-[#0A0A0A] flex items-center justify-center px-4 relative overflow-hidden">
+      {/* Orbes decorativos */}
+      <div className="absolute top-1/4 -left-32 w-64 h-64 bg-[#6B8EAE]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-1/4 -right-32 w-64 h-64 bg-[#6B8EAE]/[8%] rounded-full blur-3xl pointer-events-none" />
+      <div className="w-full max-w-md space-y-8 relative z-10">
         {/* Logo */}
         <div className="text-center">
           <Link href="/" className="inline-block">
-            <span className="text-3xl font-bold tracking-tight text-white">
+            <span className="text-4xl font-bold tracking-widest text-white">
               SIG<span className="text-[#6B8EAE]">DU</span>
             </span>
           </Link>
@@ -56,15 +59,15 @@ export default function LoginPage() {
         </div>
 
         <Card className="border-white/10 bg-white/5 backdrop-blur-sm text-white">
-          <CardHeader>
+          <CardHeader className="pb-4">
             <CardTitle className="text-xl text-white">Iniciar sesión</CardTitle>
             <CardDescription className="text-white/50">
               Ingresá con tu cuenta institucional
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="space-y-1">
+            <form onSubmit={handleSubmit} className="space-y-5">
+              <div className="space-y-2">
                 <Label htmlFor="email" className="text-white/80">
                   Email
                 </Label>
@@ -79,7 +82,7 @@ export default function LoginPage() {
                 />
               </div>
 
-              <div className="space-y-1">
+              <div className="space-y-2">
                 <Label htmlFor="password" className="text-white/80">
                   Contraseña
                 </Label>

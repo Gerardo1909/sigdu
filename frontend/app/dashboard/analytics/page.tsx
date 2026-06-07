@@ -107,18 +107,19 @@ interface KpiCardProps {
 
 function KpiCard({ title, value, icon, color }: KpiCardProps) {
   return (
-    <Card className="border border-gray-200 shadow-sm">
-      <CardContent className="pt-6">
+    <Card className="border border-gray-100 shadow-sm hover:shadow-md transition-shadow overflow-hidden !pt-0">
+      <div className="h-1 w-full" style={{ backgroundColor: color }} />
+      <CardContent className="pt-5 pb-5">
         <div className="flex items-center gap-4">
           <div
-            className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
-            style={{ backgroundColor: `${color}20` }}
+            className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0"
+            style={{ backgroundColor: `${color}18` }}
           >
             <span style={{ color }}>{icon}</span>
           </div>
           <div>
-            <p className="text-sm text-gray-500">{title}</p>
-            <p className="text-2xl font-bold text-[#1F2937] leading-tight">
+            <p className="text-xs text-gray-400 uppercase tracking-wide font-medium">{title}</p>
+            <p className="text-2xl font-bold text-[#1F2937] leading-tight mt-0.5">
               {value}
             </p>
           </div>
@@ -278,14 +279,18 @@ export default function AnalyticsDashboardPage() {
       </div>
 
       {/* Discipline filter */}
-      <div className="flex items-center gap-3">
-        <span className="text-sm text-gray-600 shrink-0">Disciplina:</span>
+      <div className="flex items-center gap-3 bg-gray-50 rounded-lg px-4 py-3 w-fit">
+        <span className="text-sm font-medium text-gray-500 shrink-0">Disciplina:</span>
         <Select
           value={selectedDiscipline}
           onValueChange={(v) => setSelectedDiscipline(v ?? "all")}
         >
           <SelectTrigger className="w-[220px] bg-white border-gray-200">
-            <SelectValue placeholder="Todas las disciplinas" />
+            <SelectValue>
+              {selectedDiscipline === "all"
+                ? "Todas las disciplinas"
+                : (disciplines.find((d) => d.id === selectedDiscipline)?.name ?? "Disciplina")}
+            </SelectValue>
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="all">Todas las disciplinas</SelectItem>

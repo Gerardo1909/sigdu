@@ -125,14 +125,18 @@ export default function CatalogPage() {
         </div>
 
         {/* Filtros */}
-        <div className="flex flex-wrap gap-4 mb-8">
+        <div className="flex flex-wrap gap-4 mb-8 bg-white/5 rounded-xl p-4 border border-white/10">
           <div className="min-w-[200px]">
             <Select
               value={selectedDiscipline}
               onValueChange={(v) => setSelectedDiscipline(v ?? "all")}
             >
               <SelectTrigger className="bg-white/5 border-white/20 text-white">
-                <SelectValue placeholder="Disciplina" />
+                <SelectValue>
+                  {selectedDiscipline === "all"
+                    ? "Todas las disciplinas"
+                    : (disciplines.find((d) => d.id === selectedDiscipline)?.name ?? "Disciplina")}
+                </SelectValue>
               </SelectTrigger>
               <SelectContent className="bg-[#1a1a2e] border-white/20 text-white">
                 <SelectItem value="all">Todas las disciplinas</SelectItem>
@@ -148,7 +152,11 @@ export default function CatalogPage() {
           <div className="min-w-[200px]">
             <Select value={selectedVenue} onValueChange={(v) => setSelectedVenue(v ?? "all")}>
               <SelectTrigger className="bg-white/5 border-white/20 text-white">
-                <SelectValue placeholder="Sede" />
+                <SelectValue>
+                  {selectedVenue === "all"
+                    ? "Todas las sedes"
+                    : (venues.find((v) => v.id === selectedVenue)?.name ?? "Sede")}
+                </SelectValue>
               </SelectTrigger>
               <SelectContent className="bg-[#1a1a2e] border-white/20 text-white">
                 <SelectItem value="all">Todas las sedes</SelectItem>
