@@ -14,7 +14,7 @@ Sistema de gestión de inscripciones, asistencia y analytics deportivo para la U
 ## Setup (3 comandos)
 
 ```bash
-git clone <URL-del-repositorio>
+git clone https://github.com/Gerardo1909/sigdu.git
 cd sigdu
 docker compose up --build
 ```
