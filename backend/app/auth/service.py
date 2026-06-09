@@ -59,8 +59,8 @@ async def create_user(
     )
     db.add(user)
     await db.commit()
-    await db.refresh(user)
-    return user
+    created = await db.scalar(select(User).where(User.id == user.id))
+    return created
 
 
 async def authenticate_user(db: AsyncSession, email: str, password: str) -> User:
